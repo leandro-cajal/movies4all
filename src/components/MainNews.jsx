@@ -19,7 +19,7 @@ const MainNews = () => {
         const response = await axios.get(`${BASE_URL}/movie/now_playing`, {
           params: {
             api_key: API_KEY,
-            language: 'es-ES',
+            language: 'en-EN',
             page: 1,
           },
         });
@@ -34,11 +34,11 @@ const MainNews = () => {
 
   return (
     <div className="max-w-7xl mx-auto py-8">
-      <h1 className="text-xl font-bold mb-4">Películas Nuevas</h1>
+      <h2 className="text-xl font-bold mb-4">New Realeses</h2>
       <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={20}
-        slidesPerView={4} // Cambia según el tamaño de las pantallas
+        slidesPerView={4}
         navigation
         pagination={{ clickable: true }}
         breakpoints={{
