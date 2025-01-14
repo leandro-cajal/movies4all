@@ -5,12 +5,12 @@
 /* En tu archivo CSS principal (p. ej., index.css) */
 .swiper-button-next,
 .swiper-button-prev {
-  @apply text-yellow-500 ; /* Cambia el color del ícono */
+  @apply text-yellow-500 bg-black/70 rounded-full p-8; /* Cambia el color del ícono */
 }
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-  @apply text-yellow-300; /* Cambia el color al pasar el mouse */
+  @apply text-yellow-300 transition scale-125; /* Cambia el color al pasar el mouse */
 }
 
 body{

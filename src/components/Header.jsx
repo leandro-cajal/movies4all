@@ -9,7 +9,7 @@ const Header = () => {
       <div className='w-full bg-black'>
         <header className='max-w-7xl mx-auto flex justify-between items-center px-6 py-3 text-white'>
           <Nav />
-          <div className='flex gap-6'>
+          <div className='flex gap-6 items-center'>
             <SearchBar />
             <FaUser className='text-2xl cursor-pointer hover:text-yellow-400 transition-colors' />
           </div>
