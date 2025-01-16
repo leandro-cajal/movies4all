@@ -2,43 +2,64 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
+import { fetchMovies } from '../api/api';
 
-const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
-const BASE_URL = 'https://api.themoviedb.org/3';
 
 const MainNews = () => {
   const [movies, setMovies] = useState([]);
+  const [type, setType] = useState('now_playing'); // Estado para cambiar entre tipos de listas
 
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL}/movie/now_playing`, {
-          params: {
-            api_key: API_KEY,
-            language: 'en-EN',
-            page: 1,
-          },
-        });
-        setMovies(response.data.results);
-      } catch (error) {
-        console.error('Error al obtener las películas:', error);
-      }
-    };
-
-    fetchMovies();
-  }, []);
+  useEffect(() =>{
+    const getMovies = async () =>{
+        try{
+            const moviesList = await fetchMovies(type, { page: 2 });
+            setMovies(moviesList)
+        }catch(error){
+            console.error("Error fetching movies", error)
+        }
+    }
+    getMovies();
+  },[type]); // Se ejecuta cuando cambia el tipo de lista
 
   return (
-    <div className="max-w-7xl mx-auto py-8">
-      <h2 className="text-xl font-bold mb-4">New Realeses</h2>
+    <div className="max-w-7xl mx-auto py-8 px-3">
+      {/* Botones para cambiar entre listas */}
+      <div className="mb-4 flex justify-center md:justify-start gap-4">
+        <button
+          onClick={() => setType('now_playing')}
+          className={`px-4 py-2 rounded ${
+            type === 'now_playing' ? 'bg-yellow-400' : 'bg-gray-200'
+          }`}
+        >
+          Now Playing
+        </button>
+        <button
+          onClick={() => setType('popular')}
+          className={`px-4 py-2 rounded ${
+            type === 'popular' ? 'bg-yellow-400' : 'bg-gray-200'
+          }`}
+        >
+          Popular
+        </button>
+        <button
+          onClick={() => setType('top_rated')}
+          className={`px-4 py-2 rounded ${
+            type === 'top_rated' ? 'bg-yellow-400' : 'bg-gray-200'
+          }`}
+        >
+          Top Rated
+        </button>
+      </div>
+
       <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={20}
-        slidesPerView={4}
+        slidesPerView={1}
         navigation
         pagination={{ clickable: true }}
         breakpoints={{

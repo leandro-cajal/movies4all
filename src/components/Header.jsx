@@ -3,6 +3,7 @@ import Nav from './Nav'
 import SearchBar from './SearchBar'
 import { FaUser } from 'react-icons/fa';
 
+
 const Header = () => {
   return (
     <>
