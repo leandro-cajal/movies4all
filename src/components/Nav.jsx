@@ -1,18 +1,25 @@
-import React from 'react'
-import Logo from './Logo'
+import React, { useState } from 'react'
 
 import { FaBars } from 'react-icons/fa';
 import { MdClose } from 'react-icons/md';
 
 const Nav = () => {
+
+  const [menuOpen, setMenuOpen] = useState(false)
+
+
   return (
     <>
       <nav className='flex gap-12 items-center'>
         <div className='lg:hidden'>
-          <FaBars />
+          <FaBars onClick={() => setMenuOpen(true)} />
         </div>
-        <Logo />
-        <ul className='absolute top-0 h-full bg-black w-full p-4 z-50 max-w-md lg:relative lg:flex justify-start gap-4'>
+        <a href='' className='group whitespace-nowrap px-6 py-2 relative border-none rounded-lg cursor-pointer overflow-hidden bg-transparent flex items-center justify-center before:absolute before:top-[-50%] before:left-[-50%] before:w-[200%] before:h-[200%] before:bg-[conic-gradient(#facc15,#facc15,#facc15,#facc15,#facc15)] before:animate-spin-slow before:opacity-0 before:transition-opacity before:duration-500 hover:before:opacity-100 after:absolute after:top-[2px] after:left-[2px] after:right-[2px] after:bottom-[2px] after:bg-black after:rounded-md'>
+          <h1 className='text-yellow-400 text-lg font-bold relative z-10 group-hover:text-white transition-colors'>Movies 4 All</h1>
+        </a>
+
+        <ul className={`absolute top-0 h-full bg-black w-full left-0 p-4 z-50 max-w-md transition-transform duration-300 ${menuOpen ? 'translate-x-0' : '-translate-x-full'
+          } lg:relative lg:flex lg:translate-x-0 justify-start gap-4`}>
           <li><a href="" className='hover:text-yellow-400 transition-colors font-semibold'>Home</a></li>
           <li><a href="" className='hover:text-yellow-400 transition-colors font-semibold'>Movies</a></li>
           <li><a href="" className='hover:text-yellow-400 transition-colors font-semibold'>Series</a></li>
@@ -29,7 +36,7 @@ const Nav = () => {
               </li>
             </ul>
           </li>
-          <MdClose className='text-white absolute top-4 text-2xl right-10 md:hidden'/>
+          <MdClose onClick={() => setMenuOpen(false)} className='text-white absolute top-4 text-2xl right-5 lg:hidden' />
           <li>
 
           </li>

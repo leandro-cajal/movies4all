@@ -8,7 +8,11 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        'spin-slow': 'spin 2s linear infinite', // Cambia la velocidad de 1s (por defecto) a 5s
+      }
+    }
   },
   plugins: [plugin],
 };
