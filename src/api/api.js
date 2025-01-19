@@ -18,3 +18,22 @@ export const fetchMovies = async (type, filters = {}) => {
         throw error;
     }   
 };
+
+// 🔹 Nueva función para buscar películas por nombre
+export const searchMovies = async (query) => {
+    if (!query) return []; // Si no hay query, devuelve un array vacío
+
+    try {
+        const response = await axios.get(`${BASE_URL}/search/movie`, {
+            params: {
+                api_key: API_KEY,
+                language: "en-EN",
+                query, // El texto que ingresa el usuario
+            },
+        });
+        return response.data.results; // Devuelve la lista de resultados de la búsqueda
+    } catch (error) {
+        console.error("Error searching movies:", error);
+        throw error;
+    }
+};

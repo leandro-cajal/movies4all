@@ -7,7 +7,6 @@ const Nav = () => {
 
   const [menuOpen, setMenuOpen] = useState(false)
 
-
   return (
     <>
       <nav className='flex gap-12 items-center'>
