@@ -1,27 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { searchMovies } from '../api/api';
 
 const SearchBar = () => {
-
   const [searchInput, setSearchInput] = useState("");
   const [movies, setMovies] = useState([]);
 
-  const handleInputChange = (e) =>{
+  // 🔹 Función para manejar el cambio en el input
+  const handleInputChange = (e) => {
     setSearchInput(e.target.value);
-  }
+  };
 
+  // 🔹 Función para buscar películas
   const handleSearch = async () => {
-    if(searchInput === "")return;
-    try{
+    if (searchInput.trim() === "") {
+      setMovies([]); // Limpia la lista si el input está vacío
+      return;
+    }
+
+    try {
       const results = await searchMovies(searchInput);
       setMovies(results);
-      console.log(results);
-
-    }catch (error){
-      console.error("Error fetching search results: ", error);
+    } catch (error) {
+      console.error("Error fetching search results:", error);
     }
-  }
+  };
 
   const handleKeyDown = (e) =>{
     if(e.key === "Enter"){
@@ -33,6 +36,12 @@ const SearchBar = () => {
   const HandleClick = () => {
     setSearchInput(!searchInput)
   }
+
+  // 🔹 Ejecutar la búsqueda cuando searchInput cambie
+  useEffect(() => {
+    handleSearch();
+  }, [searchInput]);
+
   return (
     <div className='flex flex-col items-center gap-4 relative'>
       <div className='flex items-center gap-2'>
